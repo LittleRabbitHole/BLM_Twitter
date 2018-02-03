@@ -59,11 +59,11 @@ summary(net_08)
 #IGRAPH U-W- 476 783 -- 
 #plot(net_08)
 
+#return all the network measures
 network_output <- function(edge.net){
   #this function is to calculate the individual network measures
-  wpid = V(edge.net)$wpid
-  SID = V(edge.net)$SID
   netID =  V(edge.net)$id
+  hashtag = V(edge.net)$label
   transitivity = transitivity(edge.net, type="local")
   betweenness = betweenness(edge.net,weights = E(edge.net)$weight, normalized = FALSE)
   betweenness_norm = betweenness(edge.net,weights = E(edge.net)$weight, normalized = TRUE)
@@ -78,9 +78,12 @@ network_output <- function(edge.net){
   weighted_Indegree = strength(edge.net, mode = "in", weights = E(edge.net)$weight)
   weighted_Outdegree = strength(edge.net, mode = "out", weights = E(edge.net)$weight)
   eigen = eigen_centrality(edge.net, weights = E(edge.net)$weight, directed = TRUE)$vector
-  net_measure = cbind(netID, SID, wpid, transitivity, betweenness, betweenness_norm, 
+  net_measure = cbind(netID, hashtag, transitivity, betweenness, betweenness_norm, 
                       closeness, closeness_norm, degree, degree_norm, Indegree, Indegree_norm, 
                       Outdegree, Outdegree_norm, weighted_Indegree, weighted_Outdegree, eigen) 
   return (net_measure)
 }
 
+network_measure_08 = network_output(net_08)
+write.csv(network_measure_08, "network_measure_08.csv")
+write_graph(net_08, "net_08.graphml", format ="graphml")
