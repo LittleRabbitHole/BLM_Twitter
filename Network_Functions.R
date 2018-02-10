@@ -1,11 +1,25 @@
 
 library(igraph)
+#some data clean
+
+pre_process <- function(newdata){
+  newdata$V1 = trimws(newdata$V1)
+  newdata$V1 = as.character(newdata$V1)
+  newdata$V2 = trimws(newdata$V2)
+  newdata$V2 = as.character(newdata$V2)
+  return(newdata)
+}
+
+
+
 #updating the global_tag_table with new data from new date
 #data_09 = read.csv("08_09.csv", header = FALSE)
+#data_09 = pre_process(data_09)
+#new_data = data_09
 update_globaltags <- function(new_data, global_tag_table){
   #updating the global_tag_table with new date
   hashtages_new = unique(c(as.character(new_data$V1), as.character(new_data$V2)) )
-  new = setdiff(global_tag_table$hashtages, hashtages_new) #new hashtags
+  new = setdiff(hashtages_new, as.character(global_tag_table$hashtages)) #new hashtags
   newIDs = (length(global_tag_table$hashtages)+1):(length(global_tag_table$hashtages)+length(new))
   new_tage_table = data.frame(ID = newIDs, hashtages = new)
   global_tag_table = rbind(global_tag_table, new_tage_table)
