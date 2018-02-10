@@ -52,3 +52,13 @@ network_measure_26 = result$network_measure
 net_26 = result$net_new
 write.csv(network_measure_26, "network_measure_26.csv")
 write_graph(net_26, "net_26.graphml", format ="graphml")
+
+
+## analysis
+network_measure = read.csv("network_measure_21.csv")
+network_measure$betweenness = as.numeric(network_measure$betweenness)
+network_measure$weighted_Indegree = as.numeric(network_measure$weighted_Indegree)
+network_measure$closeness = as.numeric(network_measure$closeness)
+#colnames(network_measure)
+order = network_measure[order(network_measure$betweenness, decreasing = TRUE),]
+order$hashtag[c(0:10)]
