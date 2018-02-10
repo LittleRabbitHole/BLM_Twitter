@@ -37,7 +37,7 @@ network_measure_09 = network_output(net_09)
 write.csv(network_measure_09, "network_measure_09.csv")
 write_graph(net_09, "net_09.graphml", format ="graphml")
 
-#updating the global_tag_table with new date 08/09
+#updating the global_tag_table with new date 08/10
 data_10 = read.csv("08_10.csv", header = FALSE)
 result = final_output(data_10)
 network_measure_10 = result$network_measure
@@ -45,3 +45,10 @@ net_10 = result$net_new
 write.csv(network_measure_10, "network_measure_10.csv")
 write_graph(net_10, "net_10.graphml", format ="graphml")
 
+#updating the global_tag_table with new date 
+data_26 = read.csv("08_26.csv", header = FALSE)
+result = final_output(data_26)
+network_measure_26 = result$network_measure
+net_26 = result$net_new
+write.csv(network_measure_26, "network_measure_26.csv")
+write_graph(net_26, "net_26.graphml", format ="graphml")
