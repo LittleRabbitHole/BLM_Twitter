@@ -1,7 +1,7 @@
 
 library(igraph)
-#some data clean
 
+#some data clean
 pre_process <- function(newdata){
   newdata$V1 = trimws(newdata$V1)
   newdata$V1 = as.character(newdata$V1)
@@ -10,7 +10,21 @@ pre_process <- function(newdata){
   return(newdata)
 }
 
-
+#output results
+#newdata = read.csv("08_10.csv", header = FALSE)
+final_output <- function(newdata){
+  newdata = pre_process(newdata)
+  #updating new global table
+  global_tag_table = update_globaltags(newdata, global_tag_table)
+  #edge number should be same as the data import edgelist number
+  edgelist_update = update_edgelist(newdata, global_tag_table)
+  net_new = hashtag_net(edgelist_update, global_tag_table)
+  summary(net_new)
+  network_measure_net_new = network_output(net_new)
+  return(list("net_new" = net_new, "network_measure" = network_measure_net_new))
+  #write.csv(network_measure_09, "network_measure_09.csv")
+  #write_graph(net_09, "net_09.graphml", format ="graphml")
+}
 
 #updating the global_tag_table with new data from new date
 #data_09 = read.csv("08_09.csv", header = FALSE)
