@@ -53,23 +53,25 @@ CorenessLayout <- function(g) {
   return(xy);
 }
 
-net = read_graph("net_26.graphml", format = "graphml")
+net = read_graph("net_15.graphml", format = "graphml")
 summary(net)
 net_new = filtered_net(net)
-write_graph(net_new, "newnet_26.graphml", format ="graphml")
+write_graph(net_new, "newnet_15.graphml", format ="graphml")
 
-net_new = read_graph("newnet_10.graphml", format = "graphml")
+#net_new = read_graph("newnet_08.graphml", format = "graphml")
 table(V(net_new)$kcore)
 #coreness
 V(net_new)$label[V(net_new)$kcore == max(V(net_new)$kcore)]
-V(net_new)$label[V(net_new)$kcore == min(V(net_new)$kcore)]
+#V(net_new)$label[V(net_new)$kcore == min(V(net_new)$kcore)]
+cliques(net_new, min = 4)
+largest_cliques(net_new)
 
 # plot
-plot(igraph::subgraph(net_new, V(net_new)$kcore == max(V(net_new)$kcore)))
-make_k_core_plot(net_new)
+plot(igraph::subgraph(net_new, V(net_new)$kcore == max(V(net_new)$kcore)), vertex.size=8, vertex.label.cex=0.9)
+#make_k_core_plot(net_new)
 
 #
 colbar <- rainbow(max(V(net_new)$kcore));
-plot(net_new, layout=CorenessLayout(net_new), vertex.size=6, vertex.label.cex=0.9, vertex.color=colbar[V(net_new)$kcore], vertex.frame.color=colbar[V(net_new)$kcore], main='Coreness 08-09');
+plot(net_new, layout=CorenessLayout(net_new), vertex.size=8, vertex.label.cex=0.9, vertex.color=colbar[V(net_new)$kcore], vertex.frame.color=colbar[V(net_new)$kcore], main='Coreness 08-09');
 
 plot(net_new, edge.width=0.05*E(net_new2)$weight, layout=layout.graphopt)
