@@ -4,6 +4,7 @@ library(dplyr)
 library(ggplot2)
 
 setwd("/Users/angli/ANG/GoogleDrive/GoogleDrive_Pitt_PhD/UPitt_PhD_O/Research/Yu-Ru_Project_GDrive/2017_blacklivesmatter/data/extracted_graph/network_graph")
+setwd("/Users/ANG/GoogleDrive/GoogleDrive_Pitt_PhD/UPitt_PhD_O/Research/Yu-Ru_Project_GDrive/2017_blacklivesmatter/data/original_graph")
 
 filtered_net <- function(net){
   #read the graph data
